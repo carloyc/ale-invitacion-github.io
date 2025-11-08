@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alejandra | 35 Años - Invitación Vaquera Elegante</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mp3"> 
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <header class="hero-section">
+        
+        <div class="hero-decorations">
+            <i class="fas fa-hat-cowboy decoration-icon icon-1 animate__animated animate__swing animate__infinite"></i>
+            <i class="fas fa-star decoration-icon icon-2 animate__animated animate__flash animate__delay-1s animate__infinite"></i>
+            <i class="fas fa-boot decoration-icon icon-3 animate__animated animate__bounceInDown animate__delay-2s"></i>
+        </div>
+        
+        <div class="hero-content">
+            <div class="title-frame animate__animated animate__fadeInDown">
+                <h1>¡Vaqueros y Vaqueras!</h1>
+            </div>
+            
+            <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
+                Se buscan cómplices para festejar a:
+            </p>
+            
+            <h2 class="name animate__animated animate__zoomInDown animate__delay-1s">Alejandra</h2>
+            <p class="age animate__animated animate__fadeInUp animate__delay-1s">35 Años</p>
+            
+            <br>
+            
+            <div class="date-box animate-pulse animate__animated animate__tada animate__delay-2s">
+                <i class="far fa-calendar-alt"></i>
+                <span class="date-text">13 de Febrero, 2025</span>
+                <span class="day-text">Jueves</span>
+            </div>
+            
+            <button id="music-toggle-btn" class="cta-button music-button animate__animated animate__pulse animate__infinite">
+                <i class="fas fa-music"></i> Toca para la Música
+            </button>
+        </div>
+    </header>
+
+    <section class="message-section section-padding">
+        <div class="separator bandana-shape"></div>
+        <div class="container">
+            <h3 class="section-title animate-fade-scroll"><i class="fas fa-boot icon-copper"></i> Ranchero Glam: ¡La Fiesta Comienza!</h3>
+            <p class="message-text animate-fade-scroll">
+                Prepárense para una noche inolvidable. Celebremos mis 35 años con un toque de **elegancia rústica**, donde la sofisticación se encuentra con el espíritu del oeste. ¡Música, baile y mucha diversión!
+            </p>
+        </div>
+    </section>
+
+    <section class="details-section section-padding">
+        <div class="container details-grid">
+            <div class="detail-card place-card animate-fade-scroll">
+                <i class="fas fa-map-marked-alt icon-copper"></i>
+                <h4>Lugar de la Celebración</h4>
+                <p>Salón El Ángel</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Salón+El+Ángel" target="_blank" class="cta-button map-button">
+                    <i class="fas fa-location-arrow"></i> Ver Ruta
+                </a>
+            </div>
+
+            <div class="detail-card dress-card animate-fade-scroll">
+                <i class="fas fa-hat-cowboy icon-copper"></i>
+                <h4>Código de Vestimenta</h4>
+                <p>¡Vaquera Elegante!</p>
+                <p class="dress-code-text">**Botas, Sombrero y tu mejor toque Glam.**</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section section-padding">
+        <div class="container">
+            <h3 class="section-title animate-fade-scroll">📸 Momentos al Estilo W.E.</h3>
+            <div class="photo-gallery">
+                <div class="gallery-item rotate-1 animate-fade-scroll">
+                    <img src="URL_IMAGEN_MODELO" alt="Modelo Vaquera Glam">
+                </div>
+                <div class="gallery-item rotate-2 animate-fade-scroll">
+                    <img src="URL_IMAGEN_BOTAS" alt="Botas de Cuero en el Rancho">
+                </div>
+                <div class="gallery-item rotate-3 animate-fade-scroll">
+                    <img src="URL_IMAGEN_CACTUS" alt="Detalle de Cactus con Brillo Cobre">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="rsvp-section section-padding">
+        <div class="wave-shape-top"></div>
+        <div class="container rsvp-content">
+            <h3 class="section-title">¡Confirma tu Asistencia!</h3>
+            <p>Es indispensable confirmar tu presencia antes del 5 de Febrero, 2025.</p>
+            <a href="https://wa.me/7971012884?text=Hola,%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Alejandra." target="_blank" class="cta-button rsvp-button animate-pulse-2">
+                <i class="fab fa-whatsapp"></i> CONFIRMAR ASISTENCIA
+            </a>
+            <p class="final-note">¡Te espero para celebrar!</p>
+        </div>
+        <div class="wave-shape-bottom"></div>
+    </section>
+
+    <footer class="main-footer">
+        <p>Invitación Digital con 💖 por <a href="https://www.knowmagicoficial.com" target="_blank">Knowmagic</a>.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Script para la animación de 'fade-in' al hacer scroll (Intersection Observer)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 
+            });
+
+            document.querySelectorAll('.animate-fade-scroll').forEach(element => {
+                element.classList.add('fade-in-hidden'); 
+                observer.observe(element);
+            });
+            
+            // Script para la Música: Control de Reproducción/Pausa/Volumen
+            const music = document.getElementById('background-music');
+            const musicBtn = document.getElementById('music-toggle-btn');
+            
+            // 1. Intentar reproducir silenciosamente al inicio
+            music.volume = 0; 
+            music.play().catch(error => {
+                 console.log("Autoplay bloqueado. El usuario debe interactuar.");
+            });
+
+            musicBtn.addEventListener('click', () => {
+                if (music.paused || music.volume === 0) {
+                    // Si está pausada o silenciada, la reproducimos y le subimos el volumen
+                    music.volume = 0.5; // Volumen medio
+                    music.play();
+                    musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Música';
+                } else {
+                    // Si está reproduciéndose con volumen, la pausamos
+                    music.pause();
+                    musicBtn.innerHTML = '<i class="fas fa-music"></i> Toca para la Música';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

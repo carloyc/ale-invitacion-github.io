@@ -1,0 +1,465 @@
+/* ================================================= */
+/* 0. VARIABLES GLOBALES Y RESET BÁSICO */
+/* ================================================= */
+
+:root {
+    /* Paleta de Colores Vaquera Elegante */
+    --color-base: #F5F5DC; /* Beige/Crema */
+    --color-base-alt: #FFFFFF; /* Blanco Puro */
+    --color-primary: #4A3A30; /* Marrón Chocolate Oscuro */
+    --color-secondary: #D9534F; /* Tono Cobre/Rojo Quemado */
+    --color-text: #4A3A30;
+    
+    /* Tipografía */
+    --font-script: 'Playfair Display', serif; 
+    --font-body: 'Cormorant Garamond', serif; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background-color: var(--color-base);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-secondary);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-family: var(--font-script);
+    font-size: clamp(1.8em, 4vw, 2.5em);
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-secondary);
+    display: inline-block;
+}
+
+/* Ocultar el reproductor de audio/video */
+#background-music {
+    display: none; 
+}
+
+/* ================================================= */
+/* 1. SECCIÓN HERO (PORTADA) - PARALLAX Y ANIMACIONES */
+/* ================================================= */
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-base-alt);
+    overflow: hidden;
+    
+    /* Imagen de Fondo con Efecto Parallax (URL accesible) */
+    background-image: url('http://googleusercontent.com/image_collection/image_retrieval/295408390637368759_0');
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: fixed; 
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(45, 30, 20, 0.55);
+    backdrop-filter: blur(1px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+}
+
+/* Marco Decorativo (Costura de cuero simulada) */
+.title-frame {
+    display: inline-block;
+    padding: 15px 30px;
+    margin-bottom: 20px;
+    border: 4px dashed var(--color-base-alt);
+    background-color: rgba(74, 58, 48, 0.85);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hero-section h1 {
+    font-family: var(--font-script);
+    font-size: clamp(2.5em, 8vw, 4.5em);
+    margin: 0;
+    line-height: 1;
+    color: var(--color-secondary);
+}
+
+.hero-section .name {
+    font-family: var(--font-script);
+    font-size: clamp(4em, 15vw, 8em);
+    margin: 10px 0;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+.date-box {
+    background-color: var(--color-secondary);
+    color: var(--color-base-alt);
+    padding: 15px 30px;
+    display: inline-block;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.2em;
+    box-shadow: 0 0 20px rgba(217, 83, 79, 0.8);
+    transition: transform 0.3s;
+}
+
+.date-box:hover {
+    transform: scale(1.05);
+}
+
+.date-box i {
+    margin-right: 10px;
+}
+
+/* Elementos Decorativos Flotantes */
+.hero-decorations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.decoration-icon {
+    position: absolute;
+    font-size: clamp(2em, 5vw, 4em);
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+}
+
+.icon-1 { top: 15%; left: 10%; color: var(--color-secondary); }
+.icon-2 { top: 50%; right: 5%; font-size: 5em; }
+.icon-3 { bottom: 10%; left: 25%; }
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.icon-2 {
+    animation: spin 8s linear infinite;
+}
+
+/* Estilo del Botón de Música */
+.music-button {
+    margin-top: 30px;
+    background-color: var(--color-secondary);
+    border: 2px solid var(--color-base-alt);
+    color: var(--color-base-alt);
+    font-size: 1.1em;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    transition: all 0.3s;
+}
+
+.music-button:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* ================================================= */
+/* 2. MENSAJE Y SEPARADORES DE SECCIÓN (CSS SHAPES) */
+/* ================================================= */
+
+.message-section {
+    background-color: var(--color-base-alt);
+    position: relative;
+}
+
+/* Separador: Bandana Inclinada (CSS Shape) */
+.bandana-shape {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: var(--color-base-alt);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.message-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.section-title i {
+    margin-right: 10px;
+}
+
+/* ================================================= */
+/* 3. DETALLES DEL EVENTO (Cards) */
+/* ================================================= */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.detail-card {
+    background-color: var(--color-base-alt);
+    border: 1px solid var(--color-primary);
+    padding: 40px;
+    text-align: center;
+    box-shadow: 8px 8px 0px var(--color-secondary);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover {
+    box-shadow: 0 0 0px var(--color-secondary);
+    transform: translateY(-5px);
+}
+
+.detail-card i {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: var(--color-secondary);
+}
+
+/* Botón CTA (Común) */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 25px;
+    background-color: var(--color-primary);
+    color: var(--color-base-alt);
+    border-radius: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-button i {
+    font-size: 1em;
+    margin-right: 8px;
+    margin-bottom: 0;
+}
+
+.map-button {
+    background-color: var(--color-secondary);
+}
+.map-button:hover {
+    background-color: var(--color-primary);
+}
+
+
+/* ================================================= */
+/* 4. GALERÍA DE FOTOS (Estilo Aleatorio/Pegado) */
+/* ================================================= */
+
+.gallery-section {
+    background-color: var(--color-base);
+}
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.gallery-item {
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.4);
+    border: 10px solid var(--color-base-alt);
+    transition: transform 0.5s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Rotaciones aleatorias */
+.rotate-1 { transform: rotate(-5deg); }
+.rotate-2 { transform: rotate(3deg); }
+.rotate-3 { transform: rotate(7deg); }
+
+.gallery-item:hover {
+    z-index: 20;
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* ================================================= */
+/* 5. SECCIÓN RSVP (Ondas CSS SHAPES) */
+/* ================================================= */
+
+.rsvp-section {
+    position: relative;
+    background-color: var(--color-primary);
+    color: var(--color-base-alt);
+    text-align: center;
+    padding-top: 120px; 
+    padding-bottom: 120px; 
+}
+
+/* CSS Shape: Onda (Estilo Montaña/Pañuelo Rústico) */
+.wave-shape-top, .wave-shape-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+}
+
+.wave-shape-top {
+    top: 0;
+    background: var(--color-base); 
+    clip-path: polygon(0 100%, 10% 50%, 20% 100%, 30% 50%, 40% 100%, 50% 50%, 60% 100%, 70% 50%, 80% 100%, 90% 50%, 100% 100%, 100% 0, 0 0); 
+}
+
+.wave-shape-bottom {
+    bottom: 0;
+    background: var(--color-base); 
+    clip-path: polygon(0 0, 10% 50%, 20% 0, 30% 50%, 40% 0, 50% 50%, 60% 0, 70% 50%, 80% 0, 90% 50%, 100% 0, 100% 100%, 0 100%);
+}
+
+.rsvp-button {
+    background-color: var(--color-secondary);
+    font-size: 1.3em;
+    padding: 15px 40px;
+    border-radius: 50px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+.rsvp-button:hover {
+    background-color: #a8423f;
+}
+
+/* ================================================= */
+/* 7. ANIMACIONES (Scroll y Pulse) */
+/* ================================================= */
+
+/* Efecto 'Pulse' (para la fecha o botón CTA) */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(217, 83, 79, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0); }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+.animate-pulse-2 {
+    animation: pulse 3s infinite;
+}
+
+/* Efecto 'Fade In' al hacer Scroll (Intersection Observer) */
+.fade-in-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================= */
+/* 8. MEDIA QUERIES (Responsividad Móvil) */
+/* ================================================= */
+
+@media (max-width: 768px) {
+    .hero-section {
+        background-attachment: scroll;
+        background-position: center center;
+    }
+    
+    .hero-section::before {
+        background: rgba(45, 30, 20, 0.7);
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    /* Ocultar elementos decorativos para limpiar la vista en móvil */
+    .icon-2, .icon-3 {
+        display: none;
+    }
+    .icon-1 {
+        font-size: 2em;
+        top: 5%;
+        left: 5%;
+    }
+    
+    .bandana-shape {
+        display: none;
+    }
+    
+    .wave-shape-top, .wave-shape-bottom {
+        height: 60px;
+    }
+
+    .detail-card {
+        padding: 30px 15px;
+        box-shadow: 5px 5px 0px var(--color-secondary);
+    }
+    
+    .gallery-item {
+        width: 90%; 
+        height: 350px;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
+        transform: rotate(0deg) !important;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.03);
+    }
+
+    .music-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
