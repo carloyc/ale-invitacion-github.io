@@ -8,7 +8,367 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ================================================= */
+        /* 0. VARIABLES GLOBALES Y RESET BÁSICO */
+        /* ================================================= */
+        :root {
+            /* Paleta de Colores Vaquera Elegante */
+            --color-base: #F5F5DC; /* Beige/Crema */
+            --color-base-alt: #FFFFFF; /* Blanco Puro */
+            --color-primary: #4A3A30; /* Marrón Chocolate Oscuro */
+            --color-secondary: #D9534F; /* Tono Cobre/Rojo Quemado */
+            --color-text: #4A3A30;
+            
+            /* Tipografía */
+            --font-script: 'Playfair Display', serif; 
+            --font-body: 'Cormorant Garamond', serif; 
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: var(--color-base);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: var(--color-secondary); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
+        .section-padding { padding: 80px 0; }
+        .section-title {
+            font-family: var(--font-script);
+            font-size: clamp(1.8em, 4vw, 2.5em);
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-secondary);
+            display: inline-block;
+        }
+        #background-music { display: none; }
+
+        /* ================================================= */
+        /* 1. SECCIÓN HERO (PORTADA) - PARALLAX */
+        /* ================================================= */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-base-alt);
+            overflow: hidden;
+            background-image: url('http://googleusercontent.com/image_generation_content/0');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed; 
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 30, 20, 0.55);
+            backdrop-filter: blur(1px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+        }
+        .title-frame {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            border: 4px dashed var(--color-base-alt);
+            background-color: rgba(74, 58, 48, 0.85);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+        }
+        .hero-section h1 {
+            font-family: var(--font-script);
+            font-size: clamp(2.5em, 8vw, 4.5em);
+            margin: 0;
+            line-height: 1;
+            color: var(--color-secondary);
+        }
+        .hero-section .name {
+            font-family: var(--font-script);
+            font-size: clamp(4em, 15vw, 8em);
+            margin: 10px 0;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9);
+        }
+        .date-box {
+            background-color: var(--color-secondary);
+            color: var(--color-base-alt);
+            padding: 15px 30px;
+            display: inline-block;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 0 20px rgba(217, 83, 79, 0.8);
+            transition: transform 0.3s;
+        }
+        .hero-decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .decoration-icon {
+            position: absolute;
+            font-size: clamp(2em, 5vw, 4em);
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+        }
+        .icon-1 { top: 15%; left: 10%; color: var(--color-secondary); }
+        .icon-2 { top: 50%; right: 5%; font-size: 5em; }
+        .icon-3 { bottom: 10%; left: 25%; }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .icon-2 { animation: spin 8s linear infinite; }
+        .music-button {
+            margin-top: 30px;
+            background-color: var(--color-secondary);
+            border: 2px solid var(--color-base-alt);
+            color: var(--color-base-alt);
+            font-size: 1.1em;
+            padding: 12px 30px;
+            cursor: pointer;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            transition: all 0.3s;
+        }
+        .music-button:hover { background-color: var(--color-primary); transform: scale(1.05); }
+
+        /* ================================================= */
+        /* NUEVO: CUENTA REGRESIVA (Temporizador) */
+        /* ================================================= */
+        .countdown-section {
+            background-color: var(--color-primary);
+            color: var(--color-base-alt);
+            text-align: center;
+            padding: 60px 0;
+        }
+        .countdown-section h3 {
+            font-family: var(--font-script);
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: var(--color-secondary);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 15px;
+            border-radius: 8px;
+            width: 120px;
+            border: 1px solid var(--color-secondary);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .countdown-box .number {
+            font-family: var(--font-script);
+            font-size: 3em;
+            display: block;
+            line-height: 1;
+            color: var(--color-secondary);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .countdown-box .label {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-top: 5px;
+            display: block;
+        }
+        .party-time {
+            font-family: var(--font-script);
+            color: var(--color-secondary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-size: 3em;
+        }
+
+        /* ================================================= */
+        /* 2. MENSAJE DE BIENVENIDA */
+        /* ================================================= */
+        .message-section { background-color: var(--color-base-alt); position: relative; }
+        .bandana-shape {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: var(--color-base-alt);
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+        }
+        .message-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2em;
+        }
+        .section-title i { margin-right: 10px; }
+
+        /* ================================================= */
+        /* 3. DETALLES DEL EVENTO (Cards) */
+        /* ================================================= */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        .detail-card {
+            background-color: var(--color-base-alt);
+            border: 1px solid var(--color-primary);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 8px 8px 0px var(--color-secondary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .detail-card h4 {
+            font-family: var(--font-script);
+            font-size: 1.8em;
+            margin-top: 10px;
+        }
+        .detail-card i {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--color-secondary);
+        }
+        /* Botón CTA (Común) */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 25px;
+            background-color: var(--color-primary);
+            color: var(--color-base-alt);
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 15px;
+        }
+        .cta-button i { font-size: 1em; margin-right: 8px; margin-bottom: 0; }
+        .map-button { background-color: var(--color-secondary); }
+        .map-button:hover { background-color: var(--color-primary); }
+
+        /* ================================================= */
+        /* 5. SECCIÓN RSVP (Confirmación) */
+        /* ================================================= */
+        .rsvp-section {
+            position: relative;
+            background-color: var(--color-primary);
+            color: var(--color-base-alt);
+            text-align: center;
+            padding-top: 120px; 
+            padding-bottom: 120px; 
+        }
+        .rsvp-content h3 {
+             color: var(--color-base-alt);
+             border-bottom: 2px solid var(--color-base-alt);
+        }
+        .rsvp-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .wave-shape-top, .wave-shape-bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            overflow: hidden;
+        }
+        .wave-shape-top {
+            top: 0;
+            background: var(--color-base); 
+            clip-path: polygon(0 100%, 10% 50%, 20% 100%, 30% 50%, 40% 100%, 50% 50%, 60% 100%, 70% 50%, 80% 100%, 90% 50%, 100% 100%, 100% 0, 0 0); 
+        }
+        .wave-shape-bottom {
+            bottom: 0;
+            background: var(--color-base); 
+            clip-path: polygon(0 0, 10% 50%, 20% 0, 30% 50%, 40% 0, 50% 50%, 60% 0, 70% 50%, 80% 0, 90% 50%, 100% 0, 100% 100%, 0 100%);
+        }
+        .rsvp-button {
+            background-color: var(--color-secondary);
+            font-size: 1.3em;
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+        .rsvp-button:hover { background-color: #a8423f; }
+        .final-note {
+            font-family: var(--font-script);
+            font-size: 1.5em !important;
+            margin-top: 30px;
+            color: var(--color-secondary);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ================================================= */
+        /* 6. FOOTER Y CRÉDITOS (Más Profesional) */
+        /* ================================================= */
+        .main-footer {
+            background-color: var(--color-primary); /* Marrón Oscuro */
+            color: #ccc;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.8em;
+            border-top: 5px solid var(--color-secondary); /* Detalle de color */
+        }
+        .main-footer p { margin: 5px 0; }
+        .main-footer a { color: var(--color-base-alt); font-weight: bold; transition: color 0.3s; }
+        .main-footer a:hover { color: var(--color-secondary); }
+
+        /* ================================================= */
+        /* 7. ANIMACIONES */
+        /* ================================================= */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(217, 83, 79, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(217, 83, 79, 0); }
+        }
+        .animate-pulse { animation: pulse 2s infinite; }
+        .animate-pulse-2 { animation: pulse 3s infinite; }
+        .fade-in-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-visible { opacity: 1; transform: translateY(0); }
+
+        /* ================================================= */
+        /* 8. MEDIA QUERIES (Responsividad Móvil) */
+        /* ================================================= */
+        @media (max-width: 768px) {
+            .hero-section { background-attachment: scroll; background-position: center center; }
+            .hero-section::before { background: rgba(45, 30, 20, 0.7); }
+            .section-padding { padding: 50px 0; }
+            .countdown-grid { flex-wrap: wrap; gap: 15px; }
+            .countdown-box { width: 45%; }
+            .countdown-box .number { font-size: 2.5em; }
+            .icon-2, .icon-3 { display: none; }
+            .icon-1 { font-size: 2em; top: 5%; left: 5%; }
+            .bandana-shape { display: none; }
+            .wave-shape-top, .wave-shape-bottom { height: 60px; }
+            .detail-card { padding: 30px 15px; box-shadow: 5px 5px 0px var(--color-secondary); }
+            .music-button { font-size: 1em; padding: 10px 20px; }
+        }
+    </style>
 </head>
 <body>
 
@@ -27,11 +387,11 @@
         
         <div class="hero-content">
             <div class="title-frame animate__animated animate__fadeInDown">
-                <h1>¡Vaqueros y Vaqueras!</h1>
+                <h1>¡Prepárense, Vaqueros!</h1>
             </div>
             
             <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
-                Se buscan cómplices para festejar a:
+                ¡El Oeste espera por la celebración de:
             </p>
             
             <h2 class="name animate__animated animate__zoomInDown animate__delay-1s">Alejandra</h2>
@@ -41,8 +401,8 @@
             
             <div class="date-box animate-pulse animate__animated animate__tada animate__delay-2s">
                 <i class="far fa-calendar-alt"></i>
-                <span class="date-text">13 de Febrero, 2025</span>
-                <span class="day-text">Jueves</span>
+                <span class="date-text">13 de Febrero, 2026</span>
+                <span class="day-text">Viernes, 8:00 PM</span>
             </div>
             
             <button id="music-toggle-btn" class="cta-button music-button animate__animated animate__pulse animate__infinite">
@@ -51,12 +411,20 @@
         </div>
     </header>
 
+    <section class="countdown-section animate-fade-scroll">
+        <div class="container">
+            <h3>¡El Gran Día está Cerca!</h3>
+            <div id="countdown" class="countdown-grid">
+                </div>
+        </div>
+    </section>
+    
     <section class="message-section section-padding">
         <div class="separator bandana-shape"></div>
         <div class="container">
-            <h3 class="section-title animate-fade-scroll"><i class="fas fa-boot icon-copper"></i> Ranchero Glam: ¡La Fiesta Comienza!</h3>
+            <h3 class="section-title animate-fade-scroll"><i class="fas fa-boot icon-copper"></i> ¡La Fiesta Comienza!</h3>
             <p class="message-text animate-fade-scroll">
-                Prepárense para una noche inolvidable. Celebremos mis 35 años con un toque de **elegancia rústica**, donde la sofisticación se encuentra con el espíritu del oeste. ¡Música, baile y mucha diversión!
+                Prepárense para una noche inolvidable. Celebraremos mis 35 años con un toque de **estilo vaquero y mucha diversión** donde el buen ambiente y la música serán los protagonistas. ¡Su presencia es mi mejor regalo!
             </p>
         </div>
     </section>
@@ -76,7 +444,7 @@
                 <i class="fas fa-hat-cowboy icon-copper"></i>
                 <h4>Código de Vestimenta</h4>
                 <p>¡Vaquera Elegante!</p>
-                <p class="dress-code-text">**Botas, Sombrero y tu mejor toque Glam.**</p>
+                <p class="dress-code-text">**Botas, Sombrero y tu mejor toque de brillo.**</p>
             </div>
         </div>
     </section>
@@ -86,42 +454,42 @@
         <div class="wave-shape-top"></div>
         <div class="container rsvp-content">
             <h3 class="section-title">¡Confirma tu Asistencia!</h3>
-            <p>Es indispensable confirmar tu presencia antes del 5 de Febrero, 2025.</p>
+            <p>
+                **Tu presencia es indispensable para el festejo.** Por favor, confírmame antes del **5 de Febrero, 2026**, para asegurar tu lugar.
+            </p>
             <a href="https://wa.me/7971012884?text=Hola,%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Alejandra." target="_blank" class="cta-button rsvp-button animate-pulse-2">
-                <i class="fab fa-whatsapp"></i> CONFIRMAR ASISTENCIA
+                <i class="fab fa-whatsapp"></i> SÍ, CONFIRMO MI ASISTENCIA
             </a>
-            <p class="final-note">¡Te espero para celebrar!</p>
+            <p class="final-note">¡Te espero para celebrar juntos!</p>
         </div>
         <div class="wave-shape-bottom"></div>
     </section>
 
     <footer class="main-footer">
-        <p>Invitación Digital creada por <a href="https://www.knowmagicoficial.com" target="_blank">Knowmagic</a>.</p>
+        <p>Invitación Digital | Un diseño exclusivo.</p>
+        <p>Desarrollo y creatividad por <a href="https://www.knowmagicoficial.com" target="_blank">Knowmagic</a>.</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Script para la animación de 'fade-in' al hacer scroll (Intersection Observer)
+            // --- 1. Script para el FADE-IN al hacer Scroll ---
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('fade-in-visible');
                     }
                 });
-            }, {
-                threshold: 0.1 
-            });
+            }, { threshold: 0.1 });
 
             document.querySelectorAll('.animate-fade-scroll').forEach(element => {
                 element.classList.add('fade-in-hidden'); 
                 observer.observe(element);
             });
             
-            // Script para la Música: Control de Reproducción/Pausa/Volumen
+            // --- 2. Script para la Música ---
             const music = document.getElementById('background-music');
             const musicBtn = document.getElementById('music-toggle-btn');
             
-            // 1. Intentar reproducir silenciosamente al inicio
             music.volume = 0; 
             music.play().catch(error => {
                  console.log("Autoplay bloqueado. El usuario debe interactuar.");
@@ -129,20 +497,58 @@
 
             musicBtn.addEventListener('click', () => {
                 if (music.paused || music.volume === 0) {
-                    // Si está pausada o silenciada, la reproducimos y le subimos el volumen
                     music.volume = 0.5; // Volumen medio
                     music.play();
                     musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Música';
                 } else {
-                    // Si está reproduciéndose con volumen, la pausamos
                     music.pause();
                     musicBtn.innerHTML = '<i class="fas fa-music"></i> Toca para la Música';
                 }
             });
+
+            // --- 3. Script para el Contador Regresivo (Día del Evento: 13 de Febrero, 2026) ---
+            // HE ACTUALIZADO EL AÑO A 2026
+            const eventDate = new Date("Feb 13, 2026 20:00:00").getTime(); // 8:00 PM
+            const countdownEl = document.getElementById('countdown');
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                let distance = eventDate - now;
+
+                // Si la distancia es negativa, el evento ya pasó
+                if (distance < 0) { 
+                    countdownEl.innerHTML = '<p class="party-time">¡LA FIESTA HA EMPEZADO!</p>';
+                    clearInterval(interval);
+                    return;
+                }
+
+                // Cálculos de tiempo
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const timeBoxes = [
+                    { number: days, label: 'Días' },
+                    { number: hours, label: 'Horas' },
+                    { number: minutes, label: 'Minutos' },
+                    { number: seconds, label: 'Segundos' }
+                ];
+
+                countdownEl.innerHTML = timeBoxes.map(box => `
+                    <div class="countdown-box">
+                        <span class="number">${box.number.toString().padStart(2, '0')}</span>
+                        <span class="label">${box.label}</span>
+                    </div>
+                `).join('');
+            }
+
+            // Iniciar y actualizar cada segundo
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Llamada inicial para evitar un segundo de retraso
         });
     </script>
 
 </body>
 
 </html>
-
