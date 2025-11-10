@@ -320,6 +320,52 @@
             color: var(--color-secondary);
         }
 
+        /* ================================================= */
+        /* NUEVO: SECCIÓN DE ANUNCIO DE VIDEO */
+        /* ================================================= */
+        .video-announcement-section {
+            background-color: var(--color-primary);
+            padding: 60px 0;
+            text-align: center;
+        }
+        .video-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 4px dashed var(--color-secondary);
+            border-radius: 10px;
+        }
+        .video-box h3 {
+            font-family: var(--font-script);
+            font-size: 2em;
+            color: var(--color-base-alt);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .video-box p {
+            color: var(--color-base);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
 
         /* ================================================= */
         /* 5. SECCIÓN RSVP (Confirmación) */
@@ -514,13 +560,28 @@
         </div>
     </div>
 </section>
+
+<section class="video-announcement-section animate-fade-scroll">
+    <div class="container">
+        <div class="video-box">
+            <h3>📢 ¡El Saludo Oficial de la Banda!</h3>
+            <p>Mira lo que tienen preparado nuestros amigos de la Banda Sinaloense para el gran festejo. ¡Te esperan!</p>
+            <div class="video-container">
+                <iframe src="video1.mp4"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="details-section section-padding">
     <div class="container details-grid">
         <div class="detail-card place-card animate-fade-scroll">
             <i class="fas fa-map-marked-alt icon-copper"></i>
             <h4>Lugar de la Celebración</h4>
             <p>Salón El Ángel</p>
-            <a href="https://maps.app.goo.gl/zPBpbnmBmVU7vKwA6" target="_blank" class="cta-button map-button">
+            <a href="https://www.google.com/maps/search/?api=1&query=Salón+El+Ángel" target="_blank" class="cta-button map-button">
                 <i class="fas fa-location-arrow"></i> Ver Ruta
             </a>
         </div>
@@ -637,4 +698,3 @@
 </body>
 
 </html>
-
