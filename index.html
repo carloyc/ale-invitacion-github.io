@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alejandra | 35 Años - Invitación Vaquera Elegante</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -19,10 +19,10 @@
             --color-primary: #4A3A30; /* Marrón Chocolate Oscuro */
             --color-secondary: #D9534F; /* Tono Cobre/Rojo Quemado */
             --color-text: #4A3A30;
-            
+
             /* Tipografía */
-            --font-script: 'Playfair Display', serif; 
-            --font-body: 'Cormorant Garamond', serif; 
+            --font-script: 'Playfair Display', serif;
+            --font-body: 'Cormorant Garamond', serif;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -64,7 +64,7 @@
             background-image: url('http://googleusercontent.com/image_generation_content/0');
             background-size: cover;
             background-position: center 30%;
-            background-attachment: fixed; 
+            background-attachment: fixed;
         }
         .hero-section::before {
             content: '';
@@ -268,6 +268,60 @@
         .map-button:hover { background-color: var(--color-primary); }
 
         /* ================================================= */
+        /* NUEVO: ITINERARIO / HORARIOS */
+        /* ================================================= */
+        .schedule-section {
+            background-color: var(--color-base);
+            padding: 60px 0;
+        }
+        .schedule-list {
+            max-width: 600px;
+            margin: 0 auto;
+            border-left: 3px solid var(--color-secondary);
+            padding-left: 20px;
+            position: relative;
+        }
+        .schedule-item {
+            position: relative;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--color-primary);
+        }
+        .schedule-item:last-child {
+            border-bottom: none;
+        }
+        /* Círculo de tiempo (Timeline dot) */
+        .schedule-item::before {
+            content: '';
+            position: absolute;
+            left: -33px; /* Alineado con el borde izquierdo */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            border: 3px solid var(--color-base-alt);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .schedule-time {
+            font-family: var(--font-script);
+            font-size: 1.5em;
+            color: var(--color-secondary);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .schedule-activity {
+            font-size: 1.1em;
+            color: var(--color-primary);
+        }
+        .schedule-activity i {
+            margin-right: 8px;
+            color: var(--color-secondary);
+        }
+
+
+        /* ================================================= */
         /* 5. SECCIÓN RSVP (Confirmación) */
         /* ================================================= */
         .rsvp-section {
@@ -275,12 +329,12 @@
             background-color: var(--color-primary);
             color: var(--color-base-alt);
             text-align: center;
-            padding-top: 120px; 
-            padding-bottom: 120px; 
+            padding-top: 120px;
+            padding-bottom: 120px;
         }
         .rsvp-content h3 {
-             color: var(--color-base-alt);
-             border-bottom: 2px solid var(--color-base-alt);
+            color: var(--color-base-alt);
+            border-bottom: 2px solid var(--color-base-alt);
         }
         .rsvp-content p {
             font-size: 1.2em;
@@ -295,12 +349,12 @@
         }
         .wave-shape-top {
             top: 0;
-            background: var(--color-base); 
-            clip-path: polygon(0 100%, 10% 50%, 20% 100%, 30% 50%, 40% 100%, 50% 50%, 60% 100%, 70% 50%, 80% 100%, 90% 50%, 100% 100%, 100% 0, 0 0); 
+            background: var(--color-base);
+            clip-path: polygon(0 100%, 10% 50%, 20% 100%, 30% 50%, 40% 100%, 50% 50%, 60% 100%, 70% 50%, 80% 100%, 90% 50%, 100% 100%, 100% 0, 0 0);
         }
         .wave-shape-bottom {
             bottom: 0;
-            background: var(--color-base); 
+            background: var(--color-base);
             clip-path: polygon(0 0, 10% 50%, 20% 0, 30% 50%, 40% 0, 50% 50%, 60% 0, 70% 50%, 80% 0, 90% 50%, 100% 0, 100% 100%, 0 100%);
         }
         .rsvp-button {
@@ -367,187 +421,218 @@
             .wave-shape-top, .wave-shape-bottom { height: 60px; }
             .detail-card { padding: 30px 15px; box-shadow: 5px 5px 0px var(--color-secondary); }
             .music-button { font-size: 1em; padding: 10px 20px; }
+
+            .schedule-list {
+                padding-left: 10px;
+                max-width: 90%;
+            }
+            .schedule-item::before {
+                left: -13px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <audio id="background-music" loop>
-        <source src="music.mp3" type="audio/mp3"> 
-        Tu navegador no soporta el elemento de audio.
-    </audio>
+<audio id="background-music" loop>
+    <source src="music.mp3" type="audio/mp3">
+    Tu navegador no soporta el elemento de audio.
+</audio>
 
-    <header class="hero-section">
-        
-        <div class="hero-decorations">
-            <i class="fas fa-hat-cowboy decoration-icon icon-1 animate__animated animate__swing animate__infinite"></i>
-            <i class="fas fa-star decoration-icon icon-2 animate__animated animate__flash animate__delay-1s animate__infinite"></i>
-            <i class="fas fa-boot decoration-icon icon-3 animate__animated animate__bounceInDown animate__delay-2s"></i>
+<header class="hero-section">
+
+    <div class="hero-decorations">
+        <i class="fas fa-hat-cowboy decoration-icon icon-1 animate__animated animate__swing animate__infinite"></i>
+        <i class="fas fa-star decoration-icon icon-2 animate__animated animate__flash animate__delay-1s animate__infinite"></i>
+        <i class="fas fa-boot decoration-icon icon-3 animate__animated animate__bounceInDown animate__delay-2s"></i>
+    </div>
+
+    <div class="hero-content">
+        <div class="title-frame animate__animated animate__fadeInDown">
+            <h1>¡Prepárense, Vaqueros!</h1>
         </div>
-        
-        <div class="hero-content">
-            <div class="title-frame animate__animated animate__fadeInDown">
-                <h1>¡Prepárense, Vaqueros!</h1>
+
+        <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
+            ¡El Oeste espera por la celebración de:
+        </p>
+
+        <h2 class="name animate__animated animate__zoomInDown animate__delay-1s">Alejandra</h2>
+        <p class="age animate__animated animate__fadeInUp animate__delay-1s">35 Años</p>
+
+        <br>
+
+        <div class="date-box animate-pulse animate__animated animate__tada animate__delay-2s">
+            <i class="far fa-calendar-alt"></i>
+            <span class="date-text">13 de Febrero, 2026</span>
+            <span class="day-text">Viernes, ¡Empieza a las 4:00 PM!</span>
+        </div>
+
+        <button id="music-toggle-btn" class="cta-button music-button animate__animated animate__pulse animate__infinite">
+            <i class="fas fa-music"></i> Toca para la Música
+        </button>
+    </div>
+</header>
+
+<section class="countdown-section animate-fade-scroll">
+    <div class="container">
+        <h3>¡El Gran Día está Cerca!</h3>
+        <div id="countdown" class="countdown-grid">
+        </div>
+    </div>
+</section>
+
+<section class="message-section section-padding">
+    <div class="separator bandana-shape"></div>
+    <div class="container">
+        <h3 class="section-title animate-fade-scroll"><i class="fas fa-boot icon-copper"></i> ¡La Fiesta Comienza!</h3>
+        <p class="message-text animate-fade-scroll">
+            Prepárense para una noche inolvidable. Celebraremos mis 35 años con un toque de **estilo vaquero y mucha diversión** donde el buen ambiente y la música serán los protagonistas. ¡Su presencia es mi mejor regalo!
+        </p>
+    </div>
+</section>
+
+<section class="schedule-section section-padding">
+    <div class="container">
+        <h3 class="section-title animate-fade-scroll"><i class="fas fa-clock icon-copper"></i> Programa del Festejo</h3>
+        <div class="schedule-list animate-fade-scroll">
+
+            <div class="schedule-item">
+                <span class="schedule-time">4:00 PM</span>
+                <span class="schedule-activity"><i class="fas fa-utensils"></i> Comida y Bienvenida</span>
             </div>
-            
-            <p class="subtitle animate__animated animate__fadeIn animate__delay-1s">
-                ¡El Oeste espera por la celebración de:
-            </p>
-            
-            <h2 class="name animate__animated animate__zoomInDown animate__delay-1s">Alejandra</h2>
-            <p class="age animate__animated animate__fadeInUp animate__delay-1s">35 Años</p>
-            
-            <br>
-            
-            <div class="date-box animate-pulse animate__animated animate__tada animate__delay-2s">
-                <i class="far fa-calendar-alt"></i>
-                <span class="date-text">13 de Febrero, 2026</span>
-                <span class="day-text">Viernes, 8:00 PM</span>
-            </div>
-            
-            <button id="music-toggle-btn" class="cta-button music-button animate__animated animate__pulse animate__infinite">
-                <i class="fas fa-music"></i> Toca para la Música
-            </button>
-        </div>
-    </header>
 
-    <section class="countdown-section animate-fade-scroll">
-        <div class="container">
-            <h3>¡El Gran Día está Cerca!</h3>
-            <div id="countdown" class="countdown-grid">
-                </div>
-        </div>
-    </section>
-    
-    <section class="message-section section-padding">
-        <div class="separator bandana-shape"></div>
-        <div class="container">
-            <h3 class="section-title animate-fade-scroll"><i class="fas fa-boot icon-copper"></i> ¡La Fiesta Comienza!</h3>
-            <p class="message-text animate-fade-scroll">
-                Prepárense para una noche inolvidable. Celebraremos mis 35 años con un toque de **estilo vaquero y mucha diversión** donde el buen ambiente y la música serán los protagonistas. ¡Su presencia es mi mejor regalo!
-            </p>
-        </div>
-    </section>
-
-    <section class="details-section section-padding">
-        <div class="container details-grid">
-            <div class="detail-card place-card animate-fade-scroll">
-                <i class="fas fa-map-marked-alt icon-copper"></i>
-                <h4>Lugar de la Celebración</h4>
-                <p>Salón El Ángel</p>
-                <a href="https://www.google.com/maps/search/?api=1&query=Salón+El+Ángel" target="_blank" class="cta-button map-button">
-                    <i class="fas fa-location-arrow"></i> Ver Ruta
-                </a>
+            <div class="schedule-item">
+                <span class="schedule-time">5:00 PM - 8:00 PM</span>
+                <span class="schedule-activity"><i class="fas fa-guitar"></i> Mariachi en Vivo</span>
             </div>
 
-            <div class="detail-card dress-card animate-fade-scroll">
-                <i class="fas fa-hat-cowboy icon-copper"></i>
-                <h4>Código de Vestimenta</h4>
-                <p>¡Vaquera Elegante!</p>
-                <p class="dress-code-text">**Botas, Sombrero y tu mejor toque de brillo.**</p>
+            <div class="schedule-item">
+                <span class="schedule-time">9:00 PM en adelante</span>
+                <span class="schedule-activity"><i class="fas fa-drum"></i> Banda Sinaloense ¡Hasta que el cuerpo aguante!</span>
             </div>
-        </div>
-    </section>
 
-    
-    <section class="rsvp-section section-padding">
-        <div class="wave-shape-top"></div>
-        <div class="container rsvp-content">
-            <h3 class="section-title">¡Confirma tu Asistencia!</h3>
-            <p>
-                **Tu presencia es indispensable para el festejo.** Por favor, confírmame antes del **5 de Febrero, 2026**, para asegurar tu lugar.
-            </p>
-            <a href="https://wa.me/7971012884?text=Hola,%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Alejandra." target="_blank" class="cta-button rsvp-button animate-pulse-2">
-                <i class="fab fa-whatsapp"></i> SÍ, CONFIRMO MI ASISTENCIA
+        </div>
+    </div>
+</section>
+<section class="details-section section-padding">
+    <div class="container details-grid">
+        <div class="detail-card place-card animate-fade-scroll">
+            <i class="fas fa-map-marked-alt icon-copper"></i>
+            <h4>Lugar de la Celebración</h4>
+            <p>Salón El Ángel</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Salón+El+Ángel" target="_blank" class="cta-button map-button">
+                <i class="fas fa-location-arrow"></i> Ver Ruta
             </a>
-            <p class="final-note">¡Te espero para celebrar juntos!</p>
         </div>
-        <div class="wave-shape-bottom"></div>
-    </section>
 
-    <footer class="main-footer">
-        <p>Invitación Digital | Un diseño exclusivo.</p>
-        <p>Desarrollo y creatividad por <a href="https://www.knowmagicoficial.com" target="_blank">Knowmagic</a>.</p>
-    </footer>
+        <div class="detail-card dress-card animate-fade-scroll">
+            <i class="fas fa-hat-cowboy icon-copper"></i>
+            <h4>Código de Vestimenta</h4>
+            <p>¡Vaquera Elegante!</p>
+            <p class="dress-code-text">**Botas, Sombrero y tu mejor toque de brillo.**</p>
+        </div>
+    </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. Script para el FADE-IN al hacer Scroll ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
 
-            document.querySelectorAll('.animate-fade-scroll').forEach(element => {
-                element.classList.add('fade-in-hidden'); 
-                observer.observe(element);
-            });
-            
-            // --- 2. Script para la Música ---
-            const music = document.getElementById('background-music');
-            const musicBtn = document.getElementById('music-toggle-btn');
-            
-            music.volume = 0; 
-            music.play().catch(error => {
-                 console.log("Autoplay bloqueado. El usuario debe interactuar.");
-            });
+<section class="rsvp-section section-padding">
+    <div class="wave-shape-top"></div>
+    <div class="container rsvp-content">
+        <h3 class="section-title">¡Confirma tu Asistencia!</h3>
+        <p>
+            **Tu presencia es indispensable para el festejo.** Por favor, confírmame antes del **5 de Febrero, 2026**, para asegurar tu lugar.
+        </p>
+        <a href="https://wa.me/7971012884?text=Hola,%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Alejandra." target="_blank" class="cta-button rsvp-button animate-pulse-2">
+            <i class="fab fa-whatsapp"></i> SÍ, CONFIRMO MI ASISTENCIA
+        </a>
+        <p class="final-note">¡Te espero para celebrar juntos!</p>
+    </div>
+    <div class="wave-shape-bottom"></div>
+</section>
 
-            musicBtn.addEventListener('click', () => {
-                if (music.paused || music.volume === 0) {
-                    music.volume = 0.5; // Volumen medio
-                    music.play();
-                    musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Música';
-                } else {
-                    music.pause();
-                    musicBtn.innerHTML = '<i class="fas fa-music"></i> Toca para la Música';
+<footer class="main-footer">
+    <p>Invitación Digital | Un diseño exclusivo.</p>
+    <p>Desarrollo y creatividad por <a href="https://www.knowmagicoficial.com" target="_blank">Knowmagic</a>.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- 1. Script para el FADE-IN al hacer Scroll ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-visible');
                 }
             });
+        }, { threshold: 0.1 });
 
-            // --- 3. Script para el Contador Regresivo (Día del Evento: 13 de Febrero, 2026) ---
-            // HE ACTUALIZADO EL AÑO A 2026
-            const eventDate = new Date("Feb 13, 2026 20:00:00").getTime(); // 8:00 PM
-            const countdownEl = document.getElementById('countdown');
+        document.querySelectorAll('.animate-fade-scroll').forEach(element => {
+            element.classList.add('fade-in-hidden');
+            observer.observe(element);
+        });
 
-            function updateCountdown() {
-                const now = new Date().getTime();
-                let distance = eventDate - now;
+        // --- 2. Script para la Música ---
+        const music = document.getElementById('background-music');
+        const musicBtn = document.getElementById('music-toggle-btn');
 
-                // Si la distancia es negativa, el evento ya pasó
-                if (distance < 0) { 
-                    countdownEl.innerHTML = '<p class="party-time">¡LA FIESTA HA EMPEZADO!</p>';
-                    clearInterval(interval);
-                    return;
-                }
+        music.volume = 0;
+        music.play().catch(error => {
+            console.log("Autoplay bloqueado. El usuario debe interactuar.");
+        });
 
-                // Cálculos de tiempo
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        musicBtn.addEventListener('click', () => {
+            if (music.paused || music.volume === 0) {
+                music.volume = 0.5; // Volumen medio
+                music.play();
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Música';
+            } else {
+                music.pause();
+                musicBtn.innerHTML = '<i class="fas fa-music"></i> Toca para la Música';
+            }
+        });
 
-                const timeBoxes = [
-                    { number: days, label: 'Días' },
-                    { number: hours, label: 'Horas' },
-                    { number: minutes, label: 'Minutos' },
-                    { number: seconds, label: 'Segundos' }
-                ];
+        // --- 3. Script para el Contador Regresivo (Día del Evento: 13 de Febrero, 2026) ---
+        // Hora de inicio de la fiesta: 4:00 PM (16:00:00)
+        const eventDate = new Date("Feb 13, 2026 16:00:00").getTime();
+        const countdownEl = document.getElementById('countdown');
 
-                countdownEl.innerHTML = timeBoxes.map(box => `
+        function updateCountdown() {
+            const now = new Date().getTime();
+            let distance = eventDate - now;
+
+            // Si la distancia es negativa, el evento ya pasó
+            if (distance < 0) {
+                countdownEl.innerHTML = '<p class="party-time">¡LA FIESTA HA EMPEZADO!</p>';
+                clearInterval(interval);
+                return;
+            }
+
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const timeBoxes = [
+                { number: days, label: 'Días' },
+                { number: hours, label: 'Horas' },
+                { number: minutes, label: 'Minutos' },
+                { number: seconds, label: 'Segundos' }
+            ];
+
+            countdownEl.innerHTML = timeBoxes.map(box => `
                     <div class="countdown-box">
                         <span class="number">${box.number.toString().padStart(2, '0')}</span>
                         <span class="label">${box.label}</span>
                     </div>
                 `).join('');
-            }
+        }
 
-            // Iniciar y actualizar cada segundo
-            const interval = setInterval(updateCountdown, 1000);
-            updateCountdown(); // Llamada inicial para evitar un segundo de retraso
-        });
-    </script>
+        // Iniciar y actualizar cada segundo
+        const interval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamada inicial para evitar un segundo de retraso
+    });
+</script>
 
 </body>
 
